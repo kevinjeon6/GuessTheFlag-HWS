@@ -12,6 +12,7 @@ struct ContentView: View {
     //MARK: - Properties
     @State private var showingScore = false
     @State private var scoreTitle = ""
+    @State private var score = 0
     
     
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
@@ -60,7 +61,7 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
                 
-                Text("Score ???")
+                Text("\(score) point")
                     .foregroundColor(.white)
                     .font(.title.bold())
                 
@@ -72,7 +73,7 @@ struct ContentView: View {
                 askQuestion()
             }
         } message: {
-            Text("Your score is ???")
+            Text("Your score is \(score)")
         }
         
    
@@ -83,8 +84,10 @@ struct ContentView: View {
     
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
+            score += 1
             scoreTitle = "Correct"
         } else {
+            score -= 1
             scoreTitle = "Wrong"
         }
         
