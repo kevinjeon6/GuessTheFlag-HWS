@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
     @State private var score = 0
+
     
     
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
@@ -20,6 +21,15 @@ struct ContentView: View {
     
     @State private var correctAnswer = Int.random(in: 0...2)
     //There will be 3 flags displayed, 0, 1, 2
+    
+    //MARK: - Computed Property
+    var changeUnit: String {
+        if score > 9 {
+            return "\(score) points"
+        } else {
+            return "\(score) point"
+        }
+    }
     
     var body: some View {
         
@@ -61,7 +71,7 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
                 
-                Text("\(score) point")
+                Text("Score: \(changeUnit)")
                     .foregroundColor(.white)
                     .font(.title.bold())
                 
@@ -73,7 +83,7 @@ struct ContentView: View {
                 askQuestion()
             }
         } message: {
-            Text("Your score is \(score)")
+            Text("Your score is \(changeUnit)")
         }
         
    
